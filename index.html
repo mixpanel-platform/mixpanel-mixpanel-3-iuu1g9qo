@@ -1,15 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- jquery -->
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <!-- mixpanel -->
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
+
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+
+    <!-- Latest compiled and minified CSS for bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- datables js requirements-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <!-- datatables css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- custom styles -->
+    <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+    <!-- some general styles -->
+    <style>
+
+    </style>
+
+    <title>Mixpanel Event Rentention and Correlation</title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
+  <script type="text/javascript">
+    //set params for
+    var params ={
+      correlationEvent: "",
+      eventsArray: "",
+      start_date: moment().subtract(30, 'day').format('YYYY-MM-DD'),
+      end_date: moment().format('YYYY-MM-DD')
+    }
+  </script>
+  <script type="text/javascript" src="js/helperFunctions.js"></script>
+  <script type="text/javascript" src="js/retentionByEventCount.js"></script>
+  <script type="text/javascript" src="js/correlation.js"></script>
+  <script type="text/javascript" src="js/average-events.js"></script>
+  <script type="text/javascript" src="js/run-correlation.js"></script>
+  <script type="text/javascript" src="js/overallRetention.js"></script>
+  <script type="text/javascript" src="js/daysRetainedAfterEventWasPerformed.js"></script>
+
   <body class="mixpanel-platform-body">
-    <h1>Hello, World!</h1>
-    <script>
-      // Run queries and display results here
+    <div class="col-sm-12 text-center m-b-2">
+      <h1>Event Rentention and Correlation</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-1"></div> <!--placeholder div-->
+      <div class="col-sm-3">
+        <div id="eventSelect"></div>
+      </div><!-- /.col-sm-3 -->
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" id="overall-retention"></div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" id="bucket-retention"></div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" id="days-after-retention"></div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <!-- container for table -->
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <table id='correlation-table' class="table" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>r Coefficient</th>
+              <th>Did Correlatin Event (Avg Times Event Performed)</th>
+              <th>Did Not Do Correlatin Event (Avg Times Event Performed)</th>
+              <th>% Difference</th>
+            </tr>
+          <thead>
+        </table>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" id="scatter"></div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var eventSelect = $('#eventSelect').MPEventSelect();
+        eventSelect.on('change', function(e, eventName) {
+          params.correlationEvent = eventSelect.MPEventSelect('value')
+          console.log(params.correlationEvent,": ", typeof params.correlationEvent);
+          var chartColors = ['#53A3EB', '#32bbbd', '#a28ccb', '#da7b80', '#2bb5e2', '#e8bc66', '#d390b6', '#a0a7d6', '#e8cc75','#f3ba41','#7d92cd','#24be86']
+          Highcharts.setOptions({
+              colors: chartColors
+          });
+          runCorrelation()
+          overallRetentionQuery()
+          retentionByEventCountsQuery()
+          retentionAfterEvent()
+        });
+      // $("#submit").click(function(){
+      //   params.correlationEvent = $('#user-event').val().trim()
+      //   console.log(params.correlationEvent,": ", typeof params.correlationEvent);
+      //   //set the default Mixpanel colors for all highcharts charts
+      //   var chartColors = ['#53A3EB', '#32bbbd', '#a28ccb', '#da7b80', '#2bb5e2', '#e8bc66', '#d390b6', '#a0a7d6', '#e8cc75','#f3ba41','#7d92cd','#24be86']
+      //   Highcharts.setOptions({
+      //       colors: chartColors
+      //   });
+      //   runCorrelation()
+      //   overallRetentionQuery()
+      //   retentionByEventCountsQuery()
+      //   retentionAfterEvent()
+      // })
     </script>
   </body>
 </html>

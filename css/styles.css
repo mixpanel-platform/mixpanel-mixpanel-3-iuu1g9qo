@@ -1,0 +1,238 @@
+/*
+
+styles for header panels
+Used for top 4 panels, typically for high level metrics that are very important to a client
+
+*/
+.huge {
+    font-size: 100%;
+    font-size: 2vw;
+}
+
+.panel-mpblue {
+    border-color: #5fabf1;
+}
+
+.panel-mpblue .panel-heading {
+    border-color: #5fabf1;
+    color: #fff;
+    background-color: #5fabf1;
+}
+
+.panel-mpblue a {
+    color: #5fabf1;
+}
+
+.panel-mpblue a:hover {
+    color: #0272B4;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red a {
+    color: #d9534f;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+}
+
+.panel-text{
+    font-size: 90%;
+    font-size: 1vw;
+}
+/*end header panels*/
+
+/*hide legend on mpChart for style reasons*/
+#dau-chart .mixpanel-platform-multi_selector, #mau-chart .mixpanel-platform-multi_selector, #avg-events-per-user-per-day-chart .mixpanel-platform-multi_selector {
+    display: none;
+}
+
+.mixpanel-platform-chart_header{
+    height: 75px;
+}
+/*end hiding of legend*/
+
+/*re-style selctor on MPChart so that drop down options are't hidden*/
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector .title, .mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_toggle_label .checkbox, .mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_circle {
+    vertical-align: top;
+}
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_circle {
+    vertical-align: middle;
+}
+.checkbox, .radio {
+    position: relative;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_toggle_label{
+    background-color: #fff;
+}
+
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector.filled{
+    background-color: #fff;
+    box-shadow: inset 0 -1px #fff;
+}
+.mixpanel-platform-chart_header{
+    background-color: #fff;
+}
+.mixpanel-platform-multi_selector {
+    background-color: #fff;
+}
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_toggle_label{
+    box-shadow: inset 0 -1px #fff;
+}
+.mixpanel-platform-chart_header .mixpanel-platform-multi_selector .color_toggle_dropdown:not(:first-child) .color_toggle_label{
+    box-shadow: inset 0 -1px #fff;
+}
+/*end of re-styling of MPchart dropdowns*/
+
+#table-controls{
+    height: 20px;
+    width: 20px;
+}
+#selector-text{
+    padding: 10px;
+
+}
+.edit-table-btn{
+    background-color:#5fabf1;
+    color:#fff;
+    padding: 6px 12px;
+    border: 1px solid #4d93d7;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 1px #77bdf4,0 2px 2px -1px rgba(0,0,0,0.2);
+    font-family: proxima-nova,sans-serif;
+    font-weight: bold;
+}
+.close-btn{
+    background-color:#fff;
+    color:#777;
+    padding: 6px 12px;
+    border: 1px solid #777;
+    text-transform: uppercase;
+    font-family: proxima-nova,sans-serif;
+    font-weight: bold;
+}
+.save-btn{
+    background-color:#5fabf1;
+    color:#fff;
+    padding: 6px 12px;
+    border: 1px solid #4d93d7;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 1px #77bdf4,0 2px 2px -1px rgba(0,0,0,0.2);
+    font-family: proxima-nova,sans-serif;
+    font-weight: bold;
+}
+.legend-title {
+    display:inline-block;
+    width:160px;
+    margin:1px 10px;
+    padding:0 5px;
+    text-overflow: ellipsis ellipsis;
+}
+
+.mixpanel-platform-select.event_selector_theme .select_button {
+    height: 100%;
+}
+
+.no-value{
+    background-color: #FFE7E7;
+}
+.remove-me{
+    height: 15px;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #c4c9d8;
+    box-shadow: inset 0 1px rgba(255,255,255,0.3);
+    text-align: right;
+    background-color: #edeff5;
+    background-image: linear-gradient(#f2f4f9,#e5e8ef);
+}
+#headers{
+    margin: 20px 0px 10px 0px;
+
+}
+#marketing-table td{
+    text-align: center
+}
+/*really make sure table cells stay centered*/
+td{
+    text-align: center
+}
+/*style for the export button*/
+#export{
+  background-color:#5fabf1;
+  color:#fff;
+  padding: 6px 12px;
+  border: 1px solid #4d93d7;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 1px #77bdf4,0 2px 2px -1px rgba(0,0,0,0.2);
+  font-family: proxima-nova,sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+}
+/*style for the save all button*/
+#save-all{
+  background-color:#5fabf1;
+  color:#fff;
+  padding: 6px 12px;
+  border: 1px solid #4d93d7;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 1px #77bdf4,0 2px 2px -1px rgba(0,0,0,0.2);
+  font-family: proxima-nova,sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/*
+Generic button sytling that will make the button blue and look the the "show" button in our various canned reports
+*/
+.mp-button{
+  background-color:#5fabf1;
+  color:#fff;
+  padding: 6px 12px;
+  border: 1px solid #4d93d7;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 1px #77bdf4,0 2px 2px -1px rgba(0,0,0,0.2);
+  font-family: proxima-nova,sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/*table styling*/
+table.tablesorter thead tr th{
+    border: 1px solid rgb(191, 207, 218);;
+}
+/*styles for chart cell highlighting*/
+.green{
+  background-color:  rgba(0, 255, 0, 0.8)
+}
+.yellow{
+  background-color: rgba(255,255,0,0.8)
+}
+.orange{
+  background-color: rgba(255, 153, 0, 0.8)
+}
+.red{
+  background-color: rgba(255, 0, 0, 0.8)
+}
+/*end of  styles for chart cell highlighting*/
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
